@@ -9,44 +9,44 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Company = void 0;
+exports.Product = void 0;
 const mongodb_1 = require("mongodb");
 const typeorm_1 = require("typeorm");
-let Company = class Company {
+let Product = class Product {
 };
-exports.Company = Company;
+exports.Product = Product;
 __decorate([
     (0, typeorm_1.ObjectIdColumn)(),
     __metadata("design:type", mongodb_1.ObjectId)
-], Company.prototype, "_id", void 0);
+], Product.prototype, "_id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Company.prototype, "id", void 0);
+], Product.prototype, "id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Company.prototype, "name", void 0);
+], Product.prototype, "name", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Company.prototype, "legalNumber", void 0);
+], Product.prototype, "category", void 0);
+__decorate([
+    (0, typeorm_1.Column)("float"),
+    __metadata("design:type", Number)
+], Product.prototype, "amount", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Company.prototype, "country", void 0);
+], Product.prototype, "amountUnit", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Company.prototype, "website", void 0);
+    __metadata("design:type", mongodb_1.ObjectId)
+], Product.prototype, "companyId", void 0);
 __decorate([
-    (0, typeorm_1.CreateDateColumn)(),
+    (0, typeorm_1.Column)({ default: new Date() }),
     __metadata("design:type", Date)
-], Company.prototype, "createdAt", void 0);
-__decorate([
-    (0, typeorm_1.UpdateDateColumn)(),
-    __metadata("design:type", Date)
-], Company.prototype, "updatedAt", void 0);
-exports.Company = Company = __decorate([
-    (0, typeorm_1.Entity)("companies")
-], Company);
+], Product.prototype, "createdAt", void 0);
+exports.Product = Product = __decorate([
+    (0, typeorm_1.Entity)("products")
+], Product);

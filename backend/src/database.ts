@@ -1,18 +1,20 @@
 import { DataSource } from "typeorm";
 import dotenv from "dotenv";
 import path from "path";
+import { Company } from "./entities/Company";
+import { Product } from "./entities/Product";
 
 dotenv.config();
-
+console.log(path.join(__dirname, "./migrations/*.js"))
 export const AppDataSource = new DataSource({
   type: "mongodb",
-  database: "waterdashboard",
+  database: "CompanyProject",
   url: process.env.DATABASE_URL,
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  entities: [path.join(__dirname, "./entities/*.js")],
-//   migrations: [path.join(__dirname, "./migrations/*.js")],
-  synchronize: true,
+  entities: [Company, Product],
+  migrations: [path.join(__dirname, "./migrations/*.ts")],
+  synchronize: false,
 });
 
 AppDataSource.initialize()

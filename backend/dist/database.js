@@ -7,16 +7,19 @@ exports.AppDataSource = void 0;
 const typeorm_1 = require("typeorm");
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
+const Company_1 = require("./entities/Company");
+const Product_1 = require("./entities/Product");
 dotenv_1.default.config();
+console.log(path_1.default.join(__dirname, "./migrations/*.js"));
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "mongodb",
-    database: "waterdashboard",
+    database: "CompanyProject",
     url: process.env.DATABASE_URL,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    entities: [path_1.default.join(__dirname, "./entities/*.js")],
-    //   migrations: [path.join(__dirname, "./migrations/*.js")],
-    synchronize: true,
+    entities: [Company_1.Company, Product_1.Product],
+    migrations: [path_1.default.join(__dirname, "./migrations/*.ts")],
+    synchronize: false,
 });
 exports.AppDataSource.initialize()
     .then(() => {
