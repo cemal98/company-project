@@ -1,24 +1,36 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import AppLayout from './components/Layout';
+// import Home from './pages/Home';
+// import Companies from './pages/Companies';
+// import Products from './pages/Products';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        {/* Başlangıç rotasını login'e yönlendir */}
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {/* Private rotalar */}
+        <Route
+          path="*"
+          element={
+            <AppLayout>
+              <Routes>
+                {/* <Route path="/home" element={<Home />} />
+                <Route path="/companies" element={<Companies />} />
+                <Route path="/products" element={<Products />} /> */}
+              </Routes>
+            </AppLayout>
+          }
+        />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
