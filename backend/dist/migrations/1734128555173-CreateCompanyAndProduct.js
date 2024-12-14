@@ -19,30 +19,27 @@ class CreateCompanyAndProduct1734128555173 {
     up(queryRunner) {
         return __awaiter(this, void 0, void 0, function* () {
             const mongoManager = queryRunner.connection.mongoManager;
-            // Rastgele bir tarih üretmek için yardımcı fonksiyon
             const getRandomDate = (start, end) => {
                 return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
             };
-            // Şirket oluşturma
             const companies = Array.from({ length: 30 }).map((_, index) => {
-                const createdAt = getRandomDate(new Date(2023, 0, 1), new Date()); // Rastgele bir oluşturulma tarihi
+                const createdAt = getRandomDate(new Date(2023, 0, 1), new Date());
                 return {
                     id: (0, uuid_1.v4)(),
                     name: `Company ${index + 1}`,
-                    legalNumber: (Math.random() * 1000000000).toFixed(0), // Rastgele bir yasal numara
-                    incorporationCountry: ["Turkey", "USA", "Germany"][index % 3], // Döngüsel olarak ülke atama
+                    legalNumber: (Math.random() * 1000000000).toFixed(0),
+                    incorporationCountry: ["Turkey", "USA", "Germany"][index % 3],
                     website: `https://company${index + 1}.com`,
-                    createdAt: createdAt.toISOString(), // Rastgele oluşturulma tarihi
-                    deletedAt: null, // Başlangıçta null
+                    createdAt: createdAt.toISOString(),
+                    deletedAt: null,
                 };
             });
             const products = [];
             for (let company of companies) {
                 const companyCreatedAt = (0, moment_1.default)(company.createdAt);
-                const productStartDate = companyCreatedAt.clone().add(1, "day"); // Ürünler, şirketin oluşturulma tarihinden sonra başlar
-                const productEndDate = (0, moment_1.default)(); // Bugün
-                // Her şirket için rastgele sayıda ürün oluştur (5 ila 10 arasında)
-                const numberOfProducts = Math.floor(Math.random() * 6) + 5; // 5 ila 10 arasında ürün
+                const productStartDate = companyCreatedAt.clone().add(1, "day");
+                const productEndDate = (0, moment_1.default)();
+                const numberOfProducts = Math.floor(Math.random() * 6) + 5;
                 for (let i = 0; i < numberOfProducts; i++) {
                     const randomDate = getRandomDate(productStartDate.toDate(), productEndDate.toDate());
                     products.push({
@@ -52,12 +49,11 @@ class CreateCompanyAndProduct1734128555173 {
                         amount: Math.floor(Math.random() * 1000) + 1,
                         amountUnit: "kg",
                         companyId: company.id,
-                        date: randomDate.toISOString(), // Rastgele tarih
-                        deletedAt: null, // Başlangıçta null
+                        date: randomDate.toISOString(),
+                        deletedAt: null,
                     });
                 }
             }
-            // Companies ve Products koleksiyonlarına verileri ekle
             yield mongoManager.insertMany("companies", companies);
             yield mongoManager.insertMany("products", products);
             console.log("30 Companies and their Products data have been inserted with correct dates.");
@@ -66,7 +62,6 @@ class CreateCompanyAndProduct1734128555173 {
     down(queryRunner) {
         return __awaiter(this, void 0, void 0, function* () {
             const mongoManager = queryRunner.connection.mongoManager;
-            // Companies ve Products koleksiyonlarını temizle
             yield mongoManager.deleteMany("products", {});
             yield mongoManager.deleteMany("companies", {});
             console.log("Companies and Products data have been deleted.");

@@ -5,7 +5,7 @@ import { Company } from "./entities/Company";
 import { Product } from "./entities/Product";
 
 dotenv.config();
-console.log(path.join(__dirname, "./migrations/*.js"))
+
 export const AppDataSource = new DataSource({
   type: "mongodb",
   database: "CompanyProject",

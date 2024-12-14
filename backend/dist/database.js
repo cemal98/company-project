@@ -10,7 +10,6 @@ const path_1 = __importDefault(require("path"));
 const Company_1 = require("./entities/Company");
 const Product_1 = require("./entities/Product");
 dotenv_1.default.config();
-console.log(path_1.default.join(__dirname, "./migrations/*.js"));
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "mongodb",
     database: "CompanyProject",
