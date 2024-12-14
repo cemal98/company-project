@@ -9,6 +9,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
 const Company_1 = require("./entities/Company");
 const Product_1 = require("./entities/Product");
+const User_1 = require("./entities/User");
 dotenv_1.default.config();
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "mongodb",
@@ -16,7 +17,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
     url: process.env.DATABASE_URL,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    entities: [Company_1.Company, Product_1.Product],
+    entities: [Company_1.Company, Product_1.Product, User_1.User],
     migrations: [path_1.default.join(__dirname, "./migrations/*.ts")],
     synchronize: false,
 });

@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import path from "path";
 import { Company } from "./entities/Company";
 import { Product } from "./entities/Product";
+import { User } from "./entities/User";
 
 dotenv.config();
 
@@ -12,7 +13,7 @@ export const AppDataSource = new DataSource({
   url: process.env.DATABASE_URL,
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  entities: [Company, Product],
+  entities: [Company, Product, User],
   migrations: [path.join(__dirname, "./migrations/*.ts")],
   synchronize: false,
 });

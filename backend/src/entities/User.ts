@@ -6,7 +6,7 @@ export class User {
    @ObjectIdColumn()
   _id: ObjectId;
 
-  @Column()
+  @Column({ unique: true })
   id: string;
 
   @Column()
@@ -14,4 +14,7 @@ export class User {
 
   @Column()
   password: string;
+
+  @Column()
+  email: string;
 }
