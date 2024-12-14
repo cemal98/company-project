@@ -1,17 +1,29 @@
-import React from 'react';
-import { Layout, Menu } from 'antd';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Layout, Menu } from "antd";
+import { Link, Outlet } from "react-router-dom";
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
-const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AppLayout: React.FC = () => {
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout style={{ minHeight: "100vh" }}>
       <Sider collapsible>
-        <div className="logo" style={{ height: 32, margin: 16, background: '#fff' }} />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+        <div
+          className="logo"
+          style={{
+            height: 32,
+            margin: 16,
+            background: "#fff",
+            textAlign: "center",
+            fontWeight: "bold",
+            lineHeight: "32px",
+          }}
+        >
+          LOGO
+        </div>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
           <Menu.Item key="1">
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
           </Menu.Item>
           <Menu.Item key="2">
             <Link to="/companies">Companies</Link>
@@ -22,22 +34,10 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         </Menu>
       </Sider>
 
-      {/* Main Layout */}
       <Layout>
-        {/* Header */}
-        <Header style={{ background: '#fff', padding: 0, textAlign: 'center' }}>
-          <h1 style={{ margin: 0 }}>My Dashboard</h1>
-        </Header>
-
-        {/* Content */}
-        <Content style={{ margin: '16px' }}>
-          <div style={{ padding: 24, background: '#fff', minHeight: 360 }}>{children}</div>
-        </Content>
-
-        {/* Footer */}
-        <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2024 Created by You
-        </Footer>
+          <Content style={{ margin: "16px", background: "#fff", padding: "16px" }}>
+            <Outlet />
+          </Content>
       </Layout>
     </Layout>
   );
