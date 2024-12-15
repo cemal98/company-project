@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tabs, DatePicker, Row, Col, Spin, Card } from "antd";
+import { Tabs, DatePicker, Row, Col, Spin, Card, Button } from "antd";
 import dayjs from "dayjs";
 import { useGetDashboardChartData } from "../api/services/dashboard.service";
 import {
@@ -12,6 +12,7 @@ import {
   Bar,
   ResponsiveContainer,
 } from "recharts";
+import { exportToExcel } from "../utils/exportToExcel";
 
 const { TabPane } = Tabs;
 const { RangePicker } = DatePicker;
@@ -40,6 +41,18 @@ const DashboardChartContainer: React.FC = () => {
     product: "#a8324b",
   };
 
+  const handleExport = () => {
+    if (!data || data.length === 0) return;
+
+    const formattedData = data.map((item: any) => ({
+      Date: item.date,
+      [`${activeTab.charAt(0).toUpperCase() + activeTab.slice(1)} Count`]: item.count,
+    }));
+
+    const fileName = `${activeTab}_chart_data_${dayjs().format("YYYY-MM-DD")}.xlsx`;
+    exportToExcel(formattedData, fileName, `${activeTab} Data`);
+  };
+
   return (
     <Card style={{ height: 480 }} className="mt-4">
       <Row gutter={[16, 16]}>
@@ -51,8 +64,8 @@ const DashboardChartContainer: React.FC = () => {
         </Col>
       </Row>
 
-      <Row gutter={[16, 16]} className="mt-4">
-        <Col span={24}>
+      <Row justify={"space-between"} gutter={[16, 16]} className="mt-4">
+        <Col>
           <RangePicker
             picker="month"
             onChange={handleDateChange}
@@ -61,6 +74,15 @@ const DashboardChartContainer: React.FC = () => {
               dayjs(dates[1], "YYYY-MM-DD"),
             ]}
           />
+        </Col>
+        <Col>
+          <Button
+            type="primary"
+            onClick={handleExport}
+            style={{ marginBottom: "16px" }}
+          >
+            Export to Excel
+          </Button>
         </Col>
       </Row>
 

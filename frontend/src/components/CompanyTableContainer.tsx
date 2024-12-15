@@ -4,6 +4,7 @@ import { useCreateCompany, useDeleteCompany, useEditCompany, useGetCompanyTableD
 import { useDebounce } from "use-debounce";
 import EditCompanyModal from "./EditCompanyModal";
 import CreateCompanyModal from "./CreateCompanyModal";
+import { exportToExcel } from "../utils/exportToExcel";
 
 const { Search } = Input;
 
@@ -85,6 +86,21 @@ const CompanyTableContainer: React.FC = () => {
     });
   };
 
+  const handleExport = () => {
+    if (!data || !data.results || data.results.length === 0) return;
+
+    const formattedData = data.results.map((item: any) => ({
+      "Company Name": item.name,
+      "Legal Number": item.legalNumber,
+      Country: item.incorporationCountry,
+      Website: item.website,
+      "Created At": new Date(item.createdAt).toLocaleDateString(),
+    }));
+
+    exportToExcel(formattedData, "Companies.xlsx", "Companies");
+  };
+
+
   const columns = [
     {
       title: "Company Name",
@@ -147,13 +163,22 @@ const CompanyTableContainer: React.FC = () => {
   return (
     <>
       <Row gutter={[16, 16]} style={{ marginBottom: "16px" }}>
-        <Col xs={24} sm={18}>
+        <Col xs={24} sm={12}>
           <Search
             placeholder="Search by Name, Legal Number, Country, or Website"
             onChange={handleSearchChange}
             allowClear
             value={searchQuery}
           />
+        </Col>
+        <Col xs={12} sm={6}>
+          <Button
+            type="default"
+            onClick={handleExport}
+            block
+          >
+            Export to Excel
+          </Button>
         </Col>
         <Col xs={24} sm={6} style={{ textAlign: "right" }}>
           <Button

@@ -40,7 +40,9 @@ const AppLayout: React.FC = () => {
             color: "#ffff",
           }}
         >
+          <Link to={"/home"}>
           Company Dashboard
+          </Link>
         </div>
         <Button
           icon={<MenuOutlined style={{ color: "#fff", fontSize: 20 }} />}
@@ -51,7 +53,7 @@ const AppLayout: React.FC = () => {
 
       <Drawer
         title="Menu"
-        placement="left"
+        placement="right"
         onClose={toggleDrawer}
         visible={isDrawerVisible}
         bodyStyle={{ padding: 0 }}

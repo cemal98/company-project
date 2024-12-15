@@ -40,7 +40,7 @@ const DashboardPieChartContainer: React.FC = () => {
     <Card style={{ height: 480 }} className="mt-4 w-full">
       <Row>
         <Col span={24}>
-          <h3 style={{ textAlign: "center", marginBottom: "16px" }}>Company Distribution</h3>
+          <span className="w-full flex justify-center text-xl font-semibold">Company Distribution</span>
         </Col>
       </Row>
       <Row className="w-full">

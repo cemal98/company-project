@@ -4,6 +4,7 @@ import { useGetProductTableData, useCreateProduct, useEditProduct, useDeleteProd
 import { useDebounce } from "use-debounce";
 import EditProductModal from "./EditProductModal";
 import CreateProductModal from "./CreateProductModal";
+import { exportToExcel } from "../utils/exportToExcel"; // Excel export fonksiyonunu ekleyin.
 
 const { Search } = Input;
 
@@ -83,6 +84,22 @@ const ProductTableContainer: React.FC = () => {
     });
   };
 
+  const handleExport = () => {
+    if (!data || !data.results || data.results.length === 0) return;
+
+    const formattedData = data.results.map((product: any) => ({
+      "Product Name": product.name,
+      Category: product.category,
+      Amount: product.amount,
+      "Amount Unit": product.amountUnit,
+      "Company ID": product.companyId,
+      "Created At": new Date(product.createdAt).toLocaleDateString(),
+    }));
+
+    const fileName = `products_${new Date().toISOString().split("T")[0]}.xlsx`;
+    exportToExcel(formattedData, fileName, "Products");
+  };
+
   const columns = [
     {
       title: "Product Name",
@@ -147,7 +164,7 @@ const ProductTableContainer: React.FC = () => {
   return (
     <>
       <Row gutter={[16, 16]} style={{ marginBottom: "16px" }}>
-        <Col xs={24} sm={18}>
+        <Col xs={24} sm={12}>
           <Search
             placeholder="Search by Product Name or Category"
             onChange={handleSearchChange}
@@ -156,7 +173,20 @@ const ProductTableContainer: React.FC = () => {
           />
         </Col>
         <Col xs={24} sm={6} style={{ textAlign: "right" }}>
-          <Button type="primary" onClick={() => setIsCreateModalVisible(true)} block>
+          <Button
+            type="default"
+            onClick={handleExport}
+            block
+          >
+            Export to Excel
+          </Button>
+        </Col>
+        <Col xs={24} sm={6} style={{ textAlign: "right" }}>
+          <Button
+            type="primary"
+            onClick={() => setIsCreateModalVisible(true)}
+            block
+          >
             Create Product
           </Button>
         </Col>

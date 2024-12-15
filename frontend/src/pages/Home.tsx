@@ -20,11 +20,10 @@ const Home: React.FC = () => {
   return (
     <>
       <Row className="pb-4" gutter={[16, 16]}>
-        {/* 1. Kart: Total Companies & Most Product Company */}
         <Col
-          xs={24} // 1 kart genişliğinde (mobil)
-          sm={12} // 2 kart genişliğinde (tablet)
-          lg={8}  // 3 kart genişliğinde (masaüstü)
+          xs={24}
+          sm={12}
+          lg={8}
         >
           <DashboardCard
             title="Company Overview"
@@ -37,11 +36,9 @@ const Home: React.FC = () => {
             ]}
             subtitle={`Most Productive: ${data.mostProductCompany?.name || "N/A"}`}
             bgColor="#3279a8"
-            url="/companies"
           />
         </Col>
 
-        {/* 2. Kart: Total Products & Most Stocked Product */}
         <Col
           xs={24}
           sm={12}
@@ -58,11 +55,9 @@ const Home: React.FC = () => {
             ]}
             subtitle={`Most Stocked: ${data.mostStockProduct?.name || "N/A"}`}
             bgColor="#325aa8"
-            url="/products"
           />
         </Col>
 
-        {/* 3. Kart: Last 30 Days Overview */}
         <Col
           xs={24}
           sm={12}
