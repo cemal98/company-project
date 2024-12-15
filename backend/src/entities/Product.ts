@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { Entity, ObjectIdColumn, Column } from "typeorm";
+import { Entity, ObjectIdColumn, Column, UpdateDateColumn, DeleteDateColumn, CreateDateColumn } from "typeorm";
 
 @Entity("products")
 export class Product {
@@ -24,6 +24,12 @@ export class Product {
   @Column()
   companyId: ObjectId;
 
-  @Column({ default: new Date() })
+  @CreateDateColumn()
   createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @DeleteDateColumn({ default: null })
+  deletedAt: Date;
 }

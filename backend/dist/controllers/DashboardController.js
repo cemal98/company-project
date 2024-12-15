@@ -21,68 +21,66 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductController = void 0;
+exports.DashboardController = void 0;
 const routing_controllers_1 = require("routing-controllers");
 const typedi_1 = require("typedi");
-const ProductService_1 = require("../services/ProductService");
-const ProductData_dto_1 = require("../dtos/ProductData.dto");
-let ProductController = class ProductController {
+const DashboardService_1 = require("../services/DashboardService");
+let DashboardController = class DashboardController {
     constructor(service) {
         this.service = service;
     }
-    getProductTableData(params) {
+    getDashboardData() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.getProductTableData(params);
+            return this.service.getDashboardData();
         });
     }
-    createProduct(productData) {
+    getDashboardChartData(params) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.createProduct(productData);
+            const { type, startDate, endDate } = params;
+            return this.service.getDashboardChartData(type, startDate, endDate);
         });
     }
-    updateProduct(id, productData) {
+    getDashboardTableData(params) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.updateProduct(id, productData);
+            const { type } = params;
+            return this.service.getLatestTableData(type);
         });
     }
-    deleteProduct(id) {
+    getPieChartData() {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.service.deleteProduct(id);
+            return this.service.getPieChartData();
         });
     }
 };
-exports.ProductController = ProductController;
+exports.DashboardController = DashboardController;
+__decorate([
+    (0, routing_controllers_1.Get)("/"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], DashboardController.prototype, "getDashboardData", null);
+__decorate([
+    (0, routing_controllers_1.Get)("/chart"),
+    __param(0, (0, routing_controllers_1.QueryParams)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], DashboardController.prototype, "getDashboardChartData", null);
 __decorate([
     (0, routing_controllers_1.Get)("/table"),
     __param(0, (0, routing_controllers_1.QueryParams)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [ProductData_dto_1.ProductTableDataParams]),
-    __metadata("design:returntype", Promise)
-], ProductController.prototype, "getProductTableData", null);
-__decorate([
-    (0, routing_controllers_1.Post)("/"),
-    __param(0, (0, routing_controllers_1.Body)()),
-    __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], ProductController.prototype, "createProduct", null);
+], DashboardController.prototype, "getDashboardTableData", null);
 __decorate([
-    (0, routing_controllers_1.Put)("/:id"),
-    __param(0, (0, routing_controllers_1.Param)("id")),
-    __param(1, (0, routing_controllers_1.Body)()),
+    (0, routing_controllers_1.Get)("/pie"),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], ProductController.prototype, "updateProduct", null);
-__decorate([
-    (0, routing_controllers_1.Delete)("/:id"),
-    __param(0, (0, routing_controllers_1.Param)("id")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], ProductController.prototype, "deleteProduct", null);
-exports.ProductController = ProductController = __decorate([
+], DashboardController.prototype, "getPieChartData", null);
+exports.DashboardController = DashboardController = __decorate([
     (0, typedi_1.Service)(),
-    (0, routing_controllers_1.JsonController)("/products"),
-    __metadata("design:paramtypes", [ProductService_1.ProductService])
-], ProductController);
+    (0, routing_controllers_1.JsonController)("/dashboard"),
+    __metadata("design:paramtypes", [DashboardService_1.DashboardService])
+], DashboardController);

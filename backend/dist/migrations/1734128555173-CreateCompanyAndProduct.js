@@ -49,7 +49,7 @@ class CreateCompanyAndProduct1734128555173 {
                         amount: Math.floor(Math.random() * 1000) + 1,
                         amountUnit: "kg",
                         companyId: company.id,
-                        date: randomDate.toISOString(),
+                        createdAt: randomDate.toISOString(),
                         deletedAt: null,
                     });
                 }

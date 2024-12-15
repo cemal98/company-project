@@ -34,7 +34,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Company.prototype, "country", void 0);
+], Company.prototype, "incorporationCountry", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
@@ -47,6 +47,10 @@ __decorate([
     (0, typeorm_1.UpdateDateColumn)(),
     __metadata("design:type", Date)
 ], Company.prototype, "updatedAt", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)({ default: null }),
+    __metadata("design:type", Date)
+], Company.prototype, "deletedAt", void 0);
 exports.Company = Company = __decorate([
     (0, typeorm_1.Entity)("companies")
 ], Company);

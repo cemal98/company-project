@@ -1,5 +1,5 @@
 import { ObjectId } from "mongodb";
-import { Entity, ObjectIdColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, ObjectIdColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from "typeorm";
 
 @Entity("companies")
 export class Company {
@@ -16,7 +16,7 @@ export class Company {
   legalNumber: string;
 
   @Column()
-  country: string;
+  incorporationCountry: string;
 
   @Column()
   website: string;
@@ -26,4 +26,7 @@ export class Company {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @DeleteDateColumn({ default: null })
+  deletedAt: Date;
 }

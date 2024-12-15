@@ -44,9 +44,17 @@ __decorate([
     __metadata("design:type", mongodb_1.ObjectId)
 ], Product.prototype, "companyId", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: new Date() }),
+    (0, typeorm_1.CreateDateColumn)(),
     __metadata("design:type", Date)
 ], Product.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.UpdateDateColumn)(),
+    __metadata("design:type", Date)
+], Product.prototype, "updatedAt", void 0);
+__decorate([
+    (0, typeorm_1.DeleteDateColumn)({ default: null }),
+    __metadata("design:type", Date)
+], Product.prototype, "deletedAt", void 0);
 exports.Product = Product = __decorate([
     (0, typeorm_1.Entity)("products")
 ], Product);
