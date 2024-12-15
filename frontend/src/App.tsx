@@ -5,6 +5,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { QueryClient, QueryClientProvider } from "react-query";
+import Company from "./pages/Company";
+import Product from "./pages/Product";
 
 const App: React.FC = () => {
   const queryClient = new QueryClient();
@@ -21,6 +23,8 @@ const App: React.FC = () => {
             element={<AppLayout />}
           >
             <Route path="home" element={<Home />} />
+            <Route path="/companies" element={<Company />} />
+            <Route path="/products" element={<Product />} />
           </Route>
         </Routes>
       </Router>

@@ -39,8 +39,6 @@ export const useLogin = () => {
   );
 };
 
-
-// Kullanıcı kayıt işlemi
 export const useRegister = () => {
   return useMutation((params: RegisterParams) =>
     AxiosHelper.instance.post("/auth/register", params)
