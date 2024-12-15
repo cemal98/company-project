@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import AppLayout from "./components/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -20,11 +20,15 @@ const App: React.FC = () => {
 
           <Route
             path="/"
+            element={<Navigate to="/login" />}
+          />
+          <Route
+            path="/"
             element={<AppLayout />}
           >
             <Route path="home" element={<Home />} />
-            <Route path="/companies" element={<Company />} />
-            <Route path="/products" element={<Product />} />
+            <Route path="companies" element={<Company />} />
+            <Route path="products" element={<Product />} />
           </Route>
         </Routes>
       </Router>

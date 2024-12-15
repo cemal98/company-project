@@ -23,9 +23,9 @@ const CreateProductModal: React.FC<Props> = ({ visible, onCancel, onSubmit }) =>
 
   useEffect(() => {
     if (!visible) {
-      form.resetFields(); // Modal kapandığında formu sıfırla
+      form.resetFields();
     }
-  }, [visible]);
+  }, [visible]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Modal

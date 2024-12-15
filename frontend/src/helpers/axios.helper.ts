@@ -43,4 +43,5 @@ export class AxiosHelper {
 }
 
 const backendURL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+console.log(process.env.REACT_APP_API_URL)
 new AxiosHelper(backendURL);
